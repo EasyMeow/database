@@ -22,8 +22,8 @@ public class ThemeEntity {
     @NotNull
     private String title;
 
-    @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name="teacher_code")
+    @OneToOne
+    @JoinColumn(name="teacher_code",referencedColumnName = "teacher_code")
     @NotNull
     private TeacherEntity teacher;
 
