@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 
-@PageTitle("Teachers")
+@PageTitle("Преподаватели")
 @Route(value = "teachers", layout = RootLayout.class)
 public class TeacherPage extends VerticalLayout {
     private final Grid<TeacherEntity> grid = new Grid<>();
@@ -107,17 +107,16 @@ public class TeacherPage extends VerticalLayout {
         private final TextField pulpit = new TextField("Кафедра");
         private final TextField phone = new TextField("Телефон");
         private final TextField email = new TextField("E-mail");
-        private final HorizontalLayout toolBar = new HorizontalLayout(delete,save, cancel);
+        private final HorizontalLayout toolBar = new HorizontalLayout(delete, save, cancel);
         private final HorizontalLayout items = new HorizontalLayout(name);
         private final HorizontalLayout items2 = new HorizontalLayout(degree, rank);
-        private final HorizontalLayout items3 = new HorizontalLayout(pulpit,email);
+        private final HorizontalLayout items3 = new HorizontalLayout(pulpit, email);
         private final HorizontalLayout items4 = new HorizontalLayout(phone);
 
         private final Binder<TeacherEntity> binder = new Binder<>(TeacherEntity.class);
         private TeacherEntity buffer;
         private Consumer<TeacherEntity> action;
         private Consumer<TeacherEntity> deleteAction;
-
 
         public TeacherEditor() {
             addClassName("master-detail-editor");
@@ -127,7 +126,8 @@ public class TeacherPage extends VerticalLayout {
             items2.setPadding(false);
             items3.setWidth("100%");
             items3.setPadding(false);
-
+            items4.setWidth("100%");
+            items4.setPadding(false);
 
             cancel.addClassName("cancel");
             cancel.addClickListener(e ->
@@ -140,26 +140,25 @@ public class TeacherPage extends VerticalLayout {
 
             binder.forField(degree)
                     .bind(TeacherEntity::getDegree, TeacherEntity::setDegree);
-            name.setWidth("100%");
+            degree.setWidth("100%");
 
             binder.forField(rank)
                     .bind(TeacherEntity::getRank, TeacherEntity::setRank);
-            name.setWidth("100%");
+            rank.setWidth("100%");
 
             binder.forField(pulpit)
                     .asRequired("Кафедра не может быть пустой")
                     .bind(TeacherEntity::getPulpit, TeacherEntity::setPulpit);
-            name.setWidth("100%");
+            pulpit.setWidth("100%");
 
             binder.forField(phone)
                     .asRequired("Номер телефона не может быть пустым")
                     .bind(TeacherEntity::getPhoneNumber, TeacherEntity::setPhoneNumber);
-            name.setWidth("100%");
+            phone.setWidth("100%");
 
             binder.forField(email)
                     .bind(TeacherEntity::getEmail, TeacherEntity::setEmail);
-            name.setWidth("100%");
-
+            email.setWidth("100%");
 
             save.addClickListener(event -> {
                 if (binder.writeBeanIfValid(buffer)) {
@@ -168,13 +167,13 @@ public class TeacherPage extends VerticalLayout {
                 }
             });
 
-            delete.addClickListener(click-> {
+            delete.addClickListener(click -> {
                 deleteAction.accept(buffer);
             });
             delete.addThemeName("error");
 
             save.addClickShortcut(Key.ENTER);
-            add(items, items2, items3,items4, toolBar);
+            add(items, items2, items3, items4, toolBar);
         }
 
 

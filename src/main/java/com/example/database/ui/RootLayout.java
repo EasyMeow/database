@@ -31,9 +31,9 @@ public class RootLayout extends VerticalLayout implements RouterLayout {
 
         HorizontalLayout menu = new HorizontalLayout();
         menu.addClassName("header-menu");
-        menu.add(new RouterLink("Student", StudentPage.class));
-        menu.add(new RouterLink("Teacher", TeacherPage.class));
-        menu.add(new RouterLink("Theme",ThemePage.class));
+        menu.add(new RouterLink("Студенты", StudentPage.class));
+        menu.add(new RouterLink("Преподаватели", TeacherPage.class));
+        menu.add(new RouterLink("Темы", ThemePage.class));
 
 
         User user = (User) VaadinSession.getCurrent().getAttribute("user");
@@ -44,7 +44,7 @@ public class RootLayout extends VerticalLayout implements RouterLayout {
 
         ContextMenu contextMenu = new ContextMenu();
         contextMenu.setOpenOnClick(true);
-        contextMenu.addItem("Log Out", event -> {
+        contextMenu.addItem("Выход", event -> {
             VaadinSession.getCurrent().close();
         });
 

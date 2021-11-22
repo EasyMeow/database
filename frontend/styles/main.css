@@ -5,7 +5,7 @@ a[highlight] {
 
 .header {
     width: 100%;
-    max-width: 900px;
+    max-width: 1100px;
     padding: 15px;
     /*opacity: 0.3;*/
 }
@@ -17,7 +17,7 @@ a[highlight] {
 }
 
 .content {
-    max-width: 900px;
+    max-width: 1100px;
 }
 
 .header-menu {

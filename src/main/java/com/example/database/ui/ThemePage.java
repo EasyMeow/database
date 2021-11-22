@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 
-@PageTitle("Theme")
+@PageTitle("Темы")
 @Route(value = "theme", layout = RootLayout.class)
 public class ThemePage extends VerticalLayout {
     private final Grid<ThemeEntity> grid = new Grid<>();
@@ -99,12 +99,10 @@ public class ThemePage extends VerticalLayout {
         private final HorizontalLayout toolBar = new HorizontalLayout(remove, save, cancel);
         private final VerticalLayout items = new VerticalLayout(title, teacher);
 
-
         private final Binder<ThemeEntity> binder = new Binder<>(ThemeEntity.class);
         private ThemeEntity buffer;
         private Consumer<ThemeEntity> action;
         private Consumer<ThemeEntity> deleteAction;
-
 
         public ThemeEditor() {
             addClassName("master-detail-editor");

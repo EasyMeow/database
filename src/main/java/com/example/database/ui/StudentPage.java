@@ -20,11 +20,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 
-@PageTitle("Students")
+@PageTitle("Студенты")
 @Route(value = "students", layout = RootLayout.class)
 public class StudentPage extends VerticalLayout {
     private final Grid<StudentEntity> grid = new Grid<>();
-
     private final StudentService studentService;
     private final StudentEditor editor;
     private final HorizontalLayout masterDetail = new HorizontalLayout();
@@ -32,11 +31,12 @@ public class StudentPage extends VerticalLayout {
 
     private Button create;
 
-    public StudentPage( StudentService studentService) {
+    public StudentPage(StudentService studentService) {
         this.studentService = studentService;
-        editor = new StudentEditor(studentService.loadThemes());
-        this.editor.setVisible(false);
-        this.editor.setRemoveAction(this::delete);
+        editor = new StudentEditor();
+        editor.setVisible(false);
+        editor.setThemeItems(studentService.loadThemes());
+        editor.setRemoveAction(this::delete);
         items.addAll(studentService.loadStudents());
         initTable();
         initLayout();
@@ -112,23 +112,18 @@ public class StudentPage extends VerticalLayout {
         private final ComboBox<ThemeEntity> themes = new ComboBox<>("Тема");
         private final IntegerField markExam = new IntegerField("Оценка за экзамен");
         private final IntegerField markDefence = new IntegerField("Оценка за защиту");
-        private final HorizontalLayout toolBar = new HorizontalLayout(delete,save, cancel);
+        private final HorizontalLayout toolBar = new HorizontalLayout(delete, save, cancel);
         private final HorizontalLayout items = new HorizontalLayout(name);
         private final HorizontalLayout items2 = new HorizontalLayout(faculty, group);
         private final HorizontalLayout items3 = new HorizontalLayout(themes);
         private final HorizontalLayout items4 = new HorizontalLayout(markExam, markDefence);
-
-        private final List<ThemeEntity> themesList = new ArrayList<>();
 
         private Binder<StudentEntity> binder = new Binder<>(StudentEntity.class);
         private StudentEntity buffer;
         private Consumer<StudentEntity> action;
         private Consumer<StudentEntity> deleteAction;
 
-
-        public StudentEditor(List<ThemeEntity> themesItems) {
-
-            themesList.addAll(themesItems);
+        public StudentEditor() {
 
             addClassName("master-detail-editor");
             items.setWidth("100%");
@@ -137,7 +132,8 @@ public class StudentPage extends VerticalLayout {
             items2.setPadding(false);
             items3.setWidth("100%");
             items3.setPadding(false);
-
+            items4.setWidth("100%");
+            items4.setPadding(false);
 
             cancel.addClassName("cancel");
             cancel.addClickListener(e ->
@@ -184,20 +180,17 @@ public class StudentPage extends VerticalLayout {
                 }
             });
 
-            delete.addClickListener(click-> {
-               deleteAction.accept(buffer);
+            delete.addClickListener(click -> {
+                deleteAction.accept(buffer);
             });
             delete.addThemeName("error");
             save.addClickShortcut(Key.ENTER);
             add(items, items2, items3, items4, toolBar);
         }
 
-
         public void open(StudentEntity student) {
             buffer = student;
-            themes.setItems(themesList);
             binder.readBean(buffer);
-
         }
 
         public void openCreate(StudentEntity student, Consumer<StudentEntity> action) {
@@ -218,6 +211,10 @@ public class StudentPage extends VerticalLayout {
 
         public void setRemoveAction(Consumer<StudentEntity> deleteAction) {
             this.deleteAction = deleteAction;
+        }
+
+        public void setThemeItems(List<ThemeEntity> themeItems) {
+            themes.setItems(themeItems);
         }
     }
 }
