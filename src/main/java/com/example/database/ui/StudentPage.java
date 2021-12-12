@@ -55,10 +55,10 @@ public class StudentPage extends VerticalLayout {
         grid.addColumn(StudentEntity::getTheme)
                 .setHeader("Тема")
                 .setSortable(true);
-        grid.addColumn(studentEntity -> studentEntity.getMark().getExam_mark())
+        grid.addColumn(StudentEntity::getExamMark)
                 .setHeader("Оценка(Экзамен)")
                 .setSortable(true);
-        grid.addColumn(studentEntity -> studentEntity.getMark().getDefence_mark())
+        grid.addColumn(StudentEntity::getDefenseMark)
                 .setHeader("Оценка(Защита)")
                 .setSortable(true);
 
@@ -156,14 +156,14 @@ public class StudentPage extends VerticalLayout {
 
             binder.forField(markExam)
                     .asRequired("Оценка не может быть пустой")
-                    .bind(studentEntity -> studentEntity.getMark().getExam_mark(),
-                            (studentEntity, mark) -> studentEntity.getMark().setExam_mark(mark));
+                    .bind(StudentEntity::getExamMark,
+                            StudentEntity::setExamMark);
             markExam.setWidth("100%");
 
             binder.forField(markDefence)
                     .asRequired("Оценка не может быть пустой")
-                    .bind(studentEntity -> studentEntity.getMark().getDefence_mark(),
-                            (studentEntity, mark) -> studentEntity.getMark().setDefence_mark(mark));
+                    .bind(StudentEntity::getDefenseMark,
+                            StudentEntity::setDefenseMark);
             markDefence.setWidth("100%");
 
             binder.forField(themes)

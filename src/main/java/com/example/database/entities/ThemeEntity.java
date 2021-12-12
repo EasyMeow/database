@@ -7,23 +7,23 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name = "Theme")
+@Table(name = "theme")
 @Getter
 @Setter
 public class ThemeEntity {
 
     @Id
-    @Column(name = "id_work_theme")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @NotNull
     private Long id;
 
-    @Column(name = "title_of_thesis")
+    @Column(name = "title")
     @NotNull
     private String title;
 
     @OneToOne
-    @JoinColumn(name="teacher_code",referencedColumnName = "teacher_code")
+    @JoinColumn(name="teacher",referencedColumnName = "id")
     @NotNull
     private TeacherEntity teacher;
 

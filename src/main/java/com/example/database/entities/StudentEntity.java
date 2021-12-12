@@ -8,18 +8,18 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name = "Student")
+@Table(name = "student")
 @Getter
 @Setter
 public class StudentEntity {
 
     @Id
-    @Column(name = "grade_book_number")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @NotNull
     private Long id;
 
-    @Column(name = "student_full_name")
+    @Column(name = "name")
     @NotNull
     @NotEmpty
     private String name;
@@ -34,12 +34,13 @@ public class StudentEntity {
     private int group;
 
     @OneToOne
-    @JoinColumn(name = "id_work_theme", referencedColumnName ="id_work_theme")
+    @JoinColumn(name = "theme", referencedColumnName ="id")
     private ThemeEntity theme;
 
-    @OneToOne
-    @JoinColumn(name = "grade_book_number",referencedColumnName = "mark_id")
-    @NotNull
-    private MarkEntity mark;
+    @Column(name = "defense_mark")
+    private int defenseMark;
+
+    @Column(name = "exam_mark")
+    private int examMark;
 
 }

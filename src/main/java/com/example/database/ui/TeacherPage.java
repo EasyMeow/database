@@ -45,7 +45,7 @@ public class TeacherPage extends VerticalLayout {
                 .setHeader("Степень")
                 .setSortable(true);
         grid.addColumn(TeacherEntity::getRank)
-                .setHeader("Ранк")
+                .setHeader("Звание")
                 .setSortable(true);
         grid.addColumn(TeacherEntity::getPulpit)
                 .setHeader("Кафедра")

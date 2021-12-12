@@ -40,11 +40,11 @@ public class TeacherService {
                 themes.forEach(theme-> {
                     sb.append(theme.getTitle()).append("\n");
                 });
-                Notification notification = new Notification("Данная тема уже используется студентами:"+ sb,5000);
+                Notification notification = new Notification("Данный преподаватель связан с существующей темой:"+ sb,5000);
                 notification.open();
             }
         } else {
-            Notification notification = new Notification("Невозможно удалить пустую тему",5000);
+            Notification notification = new Notification("Невозможно удалить пустого преподавателя",5000);
             notification.open();
         }
     }

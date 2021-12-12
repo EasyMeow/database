@@ -7,17 +7,17 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name = "Teather")
+@Table(name = "teacher")
 @Getter
 @Setter
 public class TeacherEntity {
     @Id
-    @Column(name = "teacher_code")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @NotNull
     private Long id;
 
-    @Column(name = "teather_full_name")
+    @Column(name = "name")
     @NotNull
     private String name;
 
@@ -27,15 +27,15 @@ public class TeacherEntity {
     @Column(name = "rank")
     private String rank;
 
-    @Column(name = "pulpit")
+    @Column(name = "department")
     @NotNull
     private String pulpit;
 
-    @Column(name = "phone_number")
+    @Column(name = "phone")
     @NotNull
     private String phoneNumber;
 
-    @Column(name = "e_mail")
+    @Column(name = "mail")
     private String email;
 
     @Override
